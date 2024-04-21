@@ -148,6 +148,9 @@ def react1(request):
 
 def obtenerDatosUsuario(request):
     idUsuario = request.GET.get('idUsuario')
+    usuarioSeleccionado = User.objects.get(id=idUsuario)
+    Usuariosnuevos= [path('react1',views.react1,name='react1'),
+    path('obtenerDatosUsuario',views.obtenerDatosUsuario,name='obtenerDatosUsuario')]
     """
     Pregunta 2
     Esta funcion devolvera los campos que se necesitan 

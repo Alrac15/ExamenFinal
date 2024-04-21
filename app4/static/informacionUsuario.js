@@ -100,4 +100,54 @@ function cargarInformacionUsuario(idUsuario)
     Revisar la implementacion realizada en clase para el detalle de las
     tareas.
     */
+    console.log("Se cargara la informacion de los usuarios %s",idUsuario)
+    fetch(`/obtenerDatosUsuario?idUsuario=${idUsuario}`)
+    .then(response => response.json())
+    .then(data => {
+        console.log(data.Usuariosnuevos)
+        usernameUsuarioDetalle = document.getElementById('usernameUsuarioDetalle')
+        nombreUsuarioDetalle = document.getElementById('nombreUsuarioDetalle')
+        apellidoUsuarioDetalle = document.getElementById('apellidoUsuarioDetalle')
+        profesionUsuarioDetalle = document.getElementById('profesionUsuarioDetalle')
+        emailUsuarioDetalle = document.getElementaryById('emailUsuarioDetalle')
+        nroCelularDetalle = document.getElementaryById('nroCelularDetalle')
+        perfilUsuarioDetalle = document.getElementaryById('perfilUsuarioDetalle')
+        indUsuario = document.getElementById('indUsuario')
+        Usuariosnuevostotal = document.getElementById('Usuariosnuevostotal')
+
+        usernameUsuarioDetalle.value = ''
+        nombreUsuarioDetalle.value = ''
+        apellidoUsuarioDetalle.value = ''
+        profesionUsuarioDetalle.value = ''
+        emailUsuarioDetalle = ''
+        nroCelularDetalle = ''
+        perfilUsuarioDetalle = ''
+        indUsuario.innerHTML = ''
+        Usuariosnuevostotal.innerHTML = ''
+        
+        usernameUsuarioDetalle.value = data.usernameUsuario
+        nombreUsuarioDetalle.value = data.nombreUsuario
+        apellidoUsuarioDetalle.value = data.apellidoUsuario
+        profesionUsuarioDetalle.value = data.profesionUsuario
+        emailUsuarioDetalle.value = data.emailUsuario
+        nroCelularDetalle = data.nroCelular
+        perfilUsuarioDetalle = data.perfilUsuario
+        indUsuario.innerHTML = data.idUsuario
+
+        for(let j = 0; j < data.Usuariosnuevostotal.length; j++)
+        {
+            seccionusuario = `
+            <div class="row mb-3">
+                <div class="col-3">
+                    ${data.Usuariosnuevostotal[j][0]}
+                </div>
+                <div class="col-9">
+                    ${data.Usuariosnuevostotal[j][1]}
+                </div>
+            </div>
+            `
+            Usuariosnuevostotal.innerHTML = Usuariosnuevostotal.innerHTML + seccionusuario
+        }
+
+    })
 }
